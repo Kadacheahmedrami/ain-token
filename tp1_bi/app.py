@@ -22,17 +22,18 @@ CSS = """
 .stApp, [data-testid="stHeader"] { background: var(--bg); color: var(--ink); }
 .stMainBlockContainer { max-width: 1480px; padding-top: 3rem; padding-bottom: 2rem; }
 h1 { color: var(--ink); letter-spacing: -.035em; font-weight: 650; }
-[data-testid="stCaptionContainer"], [data-testid="stMetricLabel"] { color: var(--muted); }
+[data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] p,
+[data-testid="stMetricLabel"] { color: var(--muted) !important; }
 [data-testid="stMetric"] { background: var(--surface); border: 1px solid var(--border);
     border-radius: 14px; padding: 20px; min-height: 132px; }
 [data-testid="stMetricValue"] { color: var(--mint); font-size: clamp(1.35rem, 2.2vw, 2rem); }
-[data-testid="stVerticalBlockBorderWrapper"] > div { border-color: var(--border) !important;
-    border-radius: 16px; background: var(--surface); }
+[data-testid="stLayoutWrapper"]:has(> [data-testid="stVerticalBlock"]) {
+    border-color: var(--border) !important; border-radius: 16px; }
 [data-testid="stExpander"] { background: var(--surface); border-color: var(--border); }
 .eyebrow { color: var(--mint); font-size: .8rem; font-weight: 600;
     letter-spacing: .14em; margin-bottom: .6rem; }
 @media (max-width: 640px) {
-    .stMainBlockContainer { padding: 2rem 1rem; }
+    .stMainBlockContainer { padding: 4.5rem 1rem 2rem; }
     h1 { font-size: 2rem !important; }
     [data-testid="stMetric"] { min-height: 112px; padding: 16px; }
 }
@@ -84,8 +85,7 @@ def style_chart(fig, height=320):
                       paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
                       font=dict(family="Calibri, Segoe UI, sans-serif", color=TEXT, size=13),
                       margin=dict(l=16, r=24, t=24, b=16),
-                      hoverlabel=dict(bgcolor="#244543", font_color=TEXT),
-                      uniformtext=dict(minsize=12, mode="hide"))
+                      hoverlabel=dict(bgcolor="#244543", font_color=TEXT))
     fig.update_xaxes(gridcolor="#244543", zeroline=False, tickfont_color=MUTED)
     fig.update_yaxes(gridcolor="#244543", zeroline=False, tickfont_color=MUTED)
     return fig
