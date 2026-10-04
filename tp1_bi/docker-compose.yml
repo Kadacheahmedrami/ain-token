@@ -1,0 +1,8 @@
+services:
+  dashboard:
+    build: .
+    image: ain-token-bi
+    container_name: ain-token-bi
+    ports:
+      - "8501:8501"          # expose publicly on the VPS: reverse-proxy this port
+    restart: unless-stopped
