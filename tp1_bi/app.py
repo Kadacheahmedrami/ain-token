@@ -106,8 +106,18 @@ def main() -> None:
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Total revenue", f"{k['total_revenue']:,.0f} DA")
     c2.metric("Tokens sold", f"{k['total_tokens']:,.0f} M tokens")
-    c3.metric("Average invoice", f"{k['avg_invoice']:,.0f} DA")
-    c4.metric("Latest MoM growth", "N/A" if k["mom"] is None else f"{k['mom']:+.1f}%")
+    c3.metric("Average invoice value", f"{k['avg_invoice']:,.0f} DA",
+              help="Total revenue divided by the number of invoices.")
+    c3.caption(f"{k['total_revenue']:,.0f} DA ÷ {len(df):,} invoices")
+    c4.metric("MoM revenue growth", "N/A" if k["mom"] is None else f"{k['mom']:+.1f}%",
+              help="(Latest month revenue − previous month revenue) ÷ previous month revenue × 100.")
+    monthly = df.groupby("month")["revenue"].sum().sort_index()
+    if k["mom"] is not None:
+        previous, latest = monthly.index[-2:]
+        c4.caption(f"{pd.Timestamp(latest):%b %Y} vs {pd.Timestamp(previous):%b %Y}: "
+                   f"{monthly.iloc[-1]:,.0f} vs {monthly.iloc[-2]:,.0f} DA")
+    else:
+        c4.caption("No comparable previous month revenue available.")
 
     if df.empty:
         st.info("No invoices available. Run create_db.py to populate the dashboard.")

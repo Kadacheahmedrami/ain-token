@@ -95,8 +95,8 @@ class TestDashboard(unittest.TestCase):
             [(m.label, m.value) for m in at.metric],
             [("Total revenue", "1,016,000 DA"),
              ("Tokens sold", "6,800 M tokens"),
-             ("Average invoice", "101,600 DA"),
-             ("Latest MoM growth", "+22.4%")],
+             ("Average invoice value", "101,600 DA"),
+             ("MoM revenue growth", "+22.4%")],
         )
         self.assertEqual(len(at.expander), 1)
 
