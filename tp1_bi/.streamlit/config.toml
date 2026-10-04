@@ -8,5 +8,9 @@ gatherUsageStats = false
 
 # Pin the theme so the dashboard looks the same on any machine.
 [theme]
-base = "light"
-primaryColor = "#1f6feb"
+base = "dark"
+primaryColor = "#BDFADE"
+backgroundColor = "#0B2121"
+secondaryBackgroundColor = "#102E2E"
+textColor = "#F2F7F5"
+font = "sans-serif"

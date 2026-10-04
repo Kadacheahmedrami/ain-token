@@ -9,7 +9,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY create_db.py app.py .streamlit ./
+COPY create_db.py app.py ./
+COPY .streamlit/ .streamlit/
 
 # Run unprivileged: the container is meant to be exposed on a VPS.
 RUN useradd --create-home --shell /usr/sbin/nologin appuser \
